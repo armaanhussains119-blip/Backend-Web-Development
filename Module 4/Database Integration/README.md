@@ -6,16 +6,30 @@ Replace the in-memory repository implementation with PostgreSQL through Prisma. 
 
 ```bash
 npm install
+npm run prisma:generate
 npm start
 ```
 
-## Prisma preparation
+## PostgreSQL setup
 
-Copy `.env.example` to `.env` with a local PostgreSQL URL. The schema is intentionally incomplete for the assignment.
+Create a local PostgreSQL database, copy `.env.example` to `.env`, and replace the
+placeholder password with your local credentials. `.env` is ignored by Git; never
+put real credentials in a commit.
 
 ```bash
 npm run prisma:format
 npm run prisma:validate
+npm run prisma:migrate
+npm run db:seed
 ```
 
-Read the platform question before editing. Do not add platform-only `question.md`, answer files, tests, or specs to this repository. Never commit `.env` or real credentials.
+The migration is named `add_core_models` and is committed in `prisma/migrations`.
+Use `npm run prisma:deploy` to apply committed migrations in a deployment
+environment. The development seed is repeatable and creates the sample author and
+posts if their IDs are unused; it does not delete existing data. It is for local
+development only.
+
+The API keeps returning post records with the original `id`, `title`, `body`, and
+`authorId` fields. Database timestamps remain internal. Database constraint
+failures are translated to safe `409` (duplicate) or `422` (invalid relation)
+responses, while unexpected errors return a generic `500`.
