@@ -10,7 +10,7 @@ async function main() {
     update: { name: 'Sam', passwordHash },
     create: { name: 'Sam', email: 'sam@example.com', passwordHash },
   });
-  console.log('Demo account: sam@example.com / SessionDemo!48');
+  console.log('Demo account seeded.');
 }
 
 main().finally(() => prisma.$disconnect());
