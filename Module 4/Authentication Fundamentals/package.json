@@ -1,0 +1,28 @@
+{
+  "name": "authentication-fundamentals",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Secure registration and login using Express, Prisma, and bcryptjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "node --watch src/app.js",
+    "test": "node --test",
+    "db:push": "prisma db push",
+    "db:setup": "prisma generate && prisma db push",
+    "prisma:validate": "prisma validate",
+    "prisma:generate": "prisma generate",
+    "prisma:format": "prisma format"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.8.2",
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "prisma": "^6.8.2"
+  }
+}
